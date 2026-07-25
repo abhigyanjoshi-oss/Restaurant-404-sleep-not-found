@@ -35,12 +35,12 @@ Smart Restaurant Management System is a full-stack SaaS platform designed to imp
 ## Tech Stack
 
 ### Frontend
-- React.js
-- Tailwind CSS
+- Html
+- css
+- javascript
 
 ### Backend
-- Node.js
-- Express.js
+-python
 
 ### Database
 - MongoDB
