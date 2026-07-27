@@ -11,9 +11,9 @@ def fix_menu_schema():
     # Add price column if missing
     if "price" not in columns:
         cursor.execute("ALTER TABLE menu ADD COLUMN price REAL DEFAULT 0")
-        print("✅ Added 'price' column to menu table.")
+        print("Added 'price' column to menu table.")
     else:
-        print("ℹ️ 'price' column already exists.")
+        print("'price' column already exists.")
 
     conn.commit()
     conn.close()

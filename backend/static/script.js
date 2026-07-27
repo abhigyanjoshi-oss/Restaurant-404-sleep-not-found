@@ -1,3 +1,10 @@
+// ================= STATE =================
+// The table the current visitor has reserved. Previously "orderItem"
+// hard-coded table_no to 1 for every visitor, which meant everyone's
+// orders were logged against Table 1 regardless of which table they
+// actually booked.
+let currentTableNo = null;
+
 // ================= TABLES =================
 
 // Load all tables dynamically from DB
@@ -42,7 +49,7 @@ function openBookingForm(tableNo) {
     const form = document.querySelector(".booking-form form");
     if (form) {
         form.dataset.tableNo = tableNo;
-        alert(`Booking form opened for Table ${tableNo}`);
+        document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
     }
 }
 
@@ -53,8 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            if (!form.dataset.tableNo) {
+                alert("Please pick a table from the Live Table Availability section first.");
+                return;
+            }
+
             const data = {
-                table_no: form.dataset.tableNo || 1,
+                table_no: Number(form.dataset.tableNo),
                 name: e.target[0].value,
                 email: e.target[1].value,
                 phone_no: e.target[2].value,
@@ -69,6 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const result = await response.json();
                 alert(result.message || result.error);
+
+                if (result.message) {
+                    currentTableNo = data.table_no;
+                }
+
                 form.reset();
                 form.dataset.tableNo = "";
                 loadTables();
@@ -89,20 +106,26 @@ async function loadMenu() {
         const container = document.querySelector(".menu-container");
         container.innerHTML = "";
 
+        if (menu.length === 0) {
+            container.innerHTML = "<p>No menu items available right now.</p>";
+            return;
+        }
+
         menu.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = `
-                <img src="/static/images/${item.item.toLowerCase().replace(/ /g, '')}.jpg" alt="${item.item}">
+                <img src="/static/images/${item.item.toLowerCase().replace(/ /g, '')}.jpg" alt="${item.item}"
+                     onerror="this.style.display='none'">
                 <h3>${item.item}</h3>
                 <p class="description">Delicious ${item.item} prepared fresh.</p>
                 <h4>₹${item.price}</h4>
-                <p>Remaining: ${item.remaining}</p>
-                <button>Order</button>
+                <p>${item.remaining > 0 ? `Remaining: ${item.remaining}` : "Sold out"}</p>
+                <button ${item.remaining > 0 ? "" : "disabled"}>Order</button>
             `;
 
             const btn = card.querySelector("button");
-            btn.onclick = () => orderItem(1, item.item);
+            btn.onclick = () => orderItem(item.item);
 
             container.appendChild(card);
         });
@@ -111,13 +134,18 @@ async function loadMenu() {
     }
 }
 
-// Place an order
-async function orderItem(tableNo, itemName) {
+// Place an order for whichever table the visitor has reserved
+async function orderItem(itemName) {
+    if (!currentTableNo) {
+        alert("Please reserve a table before ordering.");
+        return;
+    }
+
     try {
         const response = await fetch("/order", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({table_no: tableNo, item_name: itemName})
+            body: JSON.stringify({table_no: currentTableNo, item_name: itemName})
         });
         const result = await response.json();
         alert(result.message || result.error);

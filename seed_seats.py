@@ -7,7 +7,7 @@ def seed_seats():
     # Seed 6 tables
     for i in range(1, 7):
         cursor.execute("INSERT OR IGNORE INTO seats (table_no, status) VALUES (?, 'unreserved')", (i,))
-    
+
     conn.commit()
     conn.close()
     print("Seats seeded successfully!")

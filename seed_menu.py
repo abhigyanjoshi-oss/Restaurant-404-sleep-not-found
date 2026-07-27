@@ -6,12 +6,12 @@ def seed_menu():
 
     # Menu items with total serves, remaining serves, and price
     dishes = [
-        ("Cheese Pizza", 10, 10, 250),
-        ("Veg Burger", 15, 15, 150),
-        ("White Sauce Pasta", 12, 12, 200),
-        ("Cold Coffee", 20, 20, 100),
-        ("Fresh Salad", 15, 15, 120),
-        ("Chocolate Cake", 8, 8, 180)
+        ("Cheese Pizza", 0, 50, 299),
+        ("Veg Burger", 0, 70, 249),
+        ("White Sauce Pasta", 0, 50, 349),
+        ("Cold Coffee", 0, 50, 149),
+        ("Fresh Salad", 0, 50, 199),
+        ("Chocolate Cake", 0, 50, 229)
     ]
 
     # Insert all dishes
