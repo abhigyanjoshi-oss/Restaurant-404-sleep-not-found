@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Restaurant</title>
+
+    <!-- Link CSS via Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🍽 Smart Restaurant</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#tables">Tables</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-text">
+            <h1>Smart Restaurant <br> Management System</h1>
+            <p>Experience smarter dining with live table availability,
+               instant reservations, and real-time order tracking.</p>
+            <div class="buttons">
+                <button class="book-btn">Book a Table</button>
+                <button class="menu-btn">Explore Menu</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/image.png') }}" alt="Restaurant">
+        </div>
+    </section>
+
+    <!-- Link JS via Flask -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+   <!-- ================= MENU SECTION ================= -->
+<section class="menu" id="menu">
+
+    <h2>🍴 Our Popular Menu</h2>
+    <p>Choose your favourite meal before booking your table.</p>
+
+    <div class="menu-container">
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/pizza.jpg') }}" alt="Pizza">
+            <h3>Cheese Pizza</h3>
+            <p class="description">
+                Fresh mozzarella cheese with delicious toppings.
+            </p>
+            <h4>₹299</h4>
+            <button>Order Now</button>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/burger.jpg') }}" alt="Burger">
+            <h3>Veg Burger</h3>
+            <p class="description">
+                Crispy patty with fresh vegetables and cheese.
+            </p>
+            <h4>₹249</h4>
+            <button>Order Now</button>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/pasta.jpg') }}" alt="Pasta">
+            <h3>White Sauce Pasta</h3>
+            <p class="description">
+                Creamy white sauce pasta topped with herbs.
+            </p>
+            <h4>₹349</h4>
+            <button>Order Now</button>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/coffee.jpg') }}" alt="Coffee">
+            <h3>Cold Coffee</h3>
+            <p class="description">
+                Chilled coffee with chocolate and whipped cream.
+            </p>
+            <h4>₹149</h4>
+            <button>Order Now</button>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/salad.jpg') }}" alt="Salad">
+            <h3>Fresh Salad</h3>
+            <p class="description">
+                Healthy mix of fresh vegetables and dressing.
+            </p>
+            <h4>₹199</h4>
+            <button>Order Now</button>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/cake.jpg') }}" alt="Cake">
+            <h3>Chocolate Cake</h3>
+            <p class="description">
+                Soft chocolate cake with rich cream frosting.
+            </p>
+            <h4>₹229</h4>
+            <button>Order Now</button>
+        </div>
+
+    </div>
+</section>
+
+
+    <!-- ================= TABLE SECTION ================= -->
+    <section class="tables" id="tables">
+        <h2>🍽 Live Table Availability</h2>
+        <p>Book your preferred table instantly or join the waiting list.</p>
+        <div class="table-container">
+            <div class="table-card available">
+                <h3>Table 1</h3>
+                <p class="status">🟢 Available</p>
+                <button>Book Now</button>
+            </div>
+            <div class="table-card occupied">
+                <h3>Table 2</h3>
+                <p class="status">🔴 Occupied</p>
+                <p>Available in 12 min</p>
+                <button>Join Waiting List</button>
+            </div>
+            <div class="table-card reserved">
+                <h3>Table 3</h3>
+                <p class="status">🟡 Reserved</p>
+                <p>Available in 30 min</p>
+                <button>Join Waiting List</button>
+            </div>
+            <div class="table-card available">
+                <h3>Table 4</h3>
+                <p class="status">🟢 Available</p>
+                <button>Book Now</button>
+            </div>
+            <div class="table-card available">
+                <h3>Table 5</h3>
+                <p class="status">🟢 Available</p>
+                <button>Book Now</button>
+            </div>
+            <div class="table-card occupied">
+                <h3>Table 6</h3>
+                <p class="status">🔴 Occupied</p>
+                <p>Available in 8 min</p>
+                <button>Join Waiting List</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BOOKING SECTION ================= -->
+    <section class="booking" id="booking">
+        <h2>Book Your Table</h2>
+        <p>Fill in your details to reserve your table.</p>
+        <div class="booking-form">
+            <form>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Mobile Number" required>
+                <input type="time" required>
+                <button type="submit">Book Table</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT SECTION ================= -->
+    <section class="about" id="about">
+        <h2>About Us</h2>
+        <p>We bring technology and dining together to make your restaurant experience seamless.</p>
+    </section>
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@smartrestaurant.com | Phone: +91-9876543210</p>
+    </section>
+
+</body>
+</html>

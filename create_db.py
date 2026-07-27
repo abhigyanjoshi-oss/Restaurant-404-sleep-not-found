@@ -35,3 +35,4 @@ cursor.execute('''
 
 conn.commit()
 conn.close()
+print("Database created successfully!")
